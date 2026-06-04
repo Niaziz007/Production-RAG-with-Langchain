@@ -1,47 +1,43 @@
-# Production RAG Masterclass
+# Production RAG with LangChain
 
-**Build, debug, optimize, and scale Retrieval-Augmented Generation systems for production.**
+**A Retrieval-Augmented Generation system built to survive production — not just the happy path.**
 
-> *"You followed a RAG tutorial. It worked on 10 documents. Then you tried 10,000 — and everything broke."*
+> *A RAG pipeline that works on 10 documents is easy. One that holds up at 10,000 — accurate, fast, and observable — is a different problem entirely.*
 
-Most RAG tutorials stop at the happy path. This course covers what they skip: **why the majority of RAG projects fail in production, and how to fix them.**
+This project is my take on building RAG the way it actually needs to work in production: diagnosing why retrieval quality degrades at scale, and engineering around the failure modes that break most naive pipelines.
 
 ---
 
 ## Table of Contents
 
-- [What You'll Learn](#what-youll-learn)
+- [Overview](#overview)
 - [The 5 RAG Failure Modes](#the-5-rag-failure-modes)
 - [Tech Stack](#tech-stack)
-- [Quick Start](#quick-start)
-- [Course Structure](#course-structure)
-- [Part 6: Advanced RAG 2026](#part-6-advanced-rag-2026)
-- [Prerequisites](#prerequisites)
-- [Free Resources](#free-resources)
-- [Community](#community)
-- [About the Instructor](#about-the-instructor)
-- [FAQ](#faq)
+- [Getting Started](#getting-started)
+- [Project Layout](#project-layout)
+- [Roadmap](#roadmap)
+- [Advanced Techniques](#advanced-techniques)
 - [License](#license)
-- [Support](#support)
 
 ---
 
-## What You'll Learn
+## Overview
 
-| Part | Topic | What You'll Build |
-|------|-------|-------------------|
-| **1** | Build the Foundation | A complete RAG pipeline from scratch |
-| **2** | Debug RAG Failures | Fixes for the 5 failure modes that break most RAG systems |
-| **3** | Optimize for Quality | Semantic chunking, reranking, multi-query retrieval |
-| **4** | Scale for Production | Caching, monitoring, production vector databases |
-| **5** | Production Project | A full, production-ready RAG application |
-| **6** | Advanced RAG 2026 | Agentic RAG, GraphRAG, Contextual Retrieval, Multimodal |
+The goal of this project is a RAG stack that is correct, fast, and observable under real load. It covers the full pipeline:
+
+| Stage | Focus |
+|-------|-------|
+| **Foundation** | A complete RAG pipeline — loading, chunking, embedding, retrieval, generation |
+| **Reliability** | Hardening against the failure modes that break naive pipelines |
+| **Quality** | Semantic chunking, reranking, multi-query retrieval |
+| **Scale** | Caching, monitoring, production vector databases |
+| **Advanced** | Agentic RAG, GraphRAG, contextual retrieval, multimodal |
 
 ---
 
 ## The 5 RAG Failure Modes
 
-Most RAG projects fail for the same five reasons. This course teaches you to diagnose and fix each one.
+Most RAG systems fail for the same handful of reasons. This project is engineered to diagnose and fix each one.
 
 | # | Failure Mode | What Happens | The Fix |
 |---|--------------|--------------|---------|
@@ -57,82 +53,79 @@ Most RAG projects fail for the same five reasons. This course teaches you to dia
 
 | Component | Choice |
 |-----------|--------|
-| Language | Python 3.10+ |
-| Framework | LangChain 1.x (2026 stable release) |
+| Language | Python 3.13+ |
+| Framework | LangChain 1.x |
 | Agents | LangGraph 1.x (Agentic RAG) |
 | Vector Store | ChromaDB (local development) |
-| Embeddings & LLMs | OpenAI |
-| UI | Streamlit |
+| Embeddings & LLMs | OpenAI, Anthropic |
+| Package Manager | uv |
 
 ---
 
-## Quick Start
+## Getting Started
 
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/pdichone/production-rag-course.git
-cd production-rag-course
+git clone https://github.com/haseebkhan/production-rag-with-langchain.git
+cd production-rag-with-langchain
 ```
 
-### 2. Set up your environment
+### 2. Set up the environment
+
+This project uses [uv](https://github.com/astral-sh/uv):
 
 ```bash
-cd code/part1-foundation
-python -m venv venv
-source venv/bin/activate        # Windows: venv\Scripts\activate
-pip install -r requirements.txt
+uv sync
 ```
 
-Or with [uv](https://github.com/astral-sh/uv) (faster):
-
-```bash
-uv venv && uv pip install -r requirements.txt
-```
-
-### 3. Configure your API keys
+### 3. Configure API keys
 
 ```bash
 cp .env.example .env
-# Edit .env and add your OPENAI_API_KEY
+# Edit .env and add your OPENAI_API_KEY and ANTHROPIC_API_KEY
 ```
 
-### 4. Run the first example
+### 4. Verify the setup
 
 ```bash
-python 01_document_loading.py
+uv run python main.py
 ```
 
 ---
 
-## Course Structure
+## Project Layout
 
 ```
-production-rag-course/
-└── code/
-    ├── part1-foundation/
-    ├── part2-debugging/
-    ├── part3-optimization/
-    ├── part4-scaling/
-    ├── part5-production-project/
-    └── part6-advanced/              # 2026 cutting-edge
-        ├── 01_long_context_vs_rag.py
-        ├── 02_contextual_retrieval.py
-        ├── 03_late_chunking.py
-        ├── 04_agentic_rag.py
-        ├── 05_graphrag_intro.py
-        └── 06_multimodal_rag.py
+production-rag-with-langchain/
+├── main.py               # Environment + model connectivity check
+├── document_loader.py    # Document ingestion utilities
+├── pyproject.toml        # Dependencies (managed with uv)
+└── Readme.md
 ```
 
 ---
 
-## Part 6: Advanced RAG 2026
+## Roadmap
 
-The cutting-edge techniques that separate production RAG from tutorials:
+- [x] Project scaffolding and model connectivity
+- [x] Document loading utilities
+- [ ] Chunking strategies (recursive, semantic)
+- [ ] Embedding + vector store integration (ChromaDB)
+- [ ] Retrieval + generation pipeline
+- [ ] Reranking and hybrid search
+- [ ] Caching, monitoring, and evaluation
+- [ ] Agentic RAG with LangGraph
+
+---
+
+## Advanced Techniques
+
+The techniques that separate production RAG from a tutorial:
 
 | Technique | What It Solves | Improvement |
 |-----------|----------------|-------------|
-| **Long Context vs RAG** | When to use 1M-token windows vs retrieval | Cost optimization |
+| **Long Context vs RAG** | When to use large context windows vs retrieval | Cost optimization |
 | **Contextual Retrieval** | Chunks losing document context | Up to 67% fewer retrieval failures |
 | **Late Chunking** | Cross-chunk context lost in embeddings | 10–12% accuracy boost |
 | **Agentic RAG** | One-shot retrieval missing information | Self-correcting loops |
@@ -141,77 +134,6 @@ The cutting-edge techniques that separate production RAG from tutorials:
 
 ---
 
-## Prerequisites
-
-| Requirement | Level |
-|-------------|-------|
-| Python | Comfortable with functions, classes, and pip |
-| APIs | Basic understanding of REST APIs |
-| LLMs | Helpful, but not required |
-| ML / AI | Not required — we explain everything |
-
----
-
-## Free Resources
-
-**Production AI Checklist** — a free checklist for deploying AI applications to production. Covers testing, monitoring, security, and scaling.
-
-→ [Download the Production AI Checklist](#)
-
----
-
-## Community
-
-**AI Guild** — join thousands of AI engineers building production AI systems:
-
-- Live weekly sessions on AI development
-- Code reviews and architecture feedback
-- A private community of practitioners
-- Early access to new courses and content
-
-→ [Join the AI Guild](#)
-
----
-
-## About the Instructor
-
-**Paulo Dichone** — AI Engineer & Educator
-
-- 350,000+ students taught across platforms
-- 70+ courses on AI, Python, and mobile development
-- Building AI systems in production since 2015
-- Creator of the *AI Developer Masterclass* and *Vector Databases Masterclass*
-
----
-
-## FAQ
-
-**Is this different from other RAG tutorials?**
-Yes. Most tutorials show you *how* to build RAG. This course shows you *why* RAG breaks and how to fix it. The "5 Failure Modes" framework comes from teaching 300K+ students and seeing the same problems repeatedly.
-
-**Do I need a GPU?**
-No. All code runs on CPU. Part 6's Multimodal RAG section mentions a GPU for ColPali, but it's optional.
-
-**Which vector database should I use?**
-We use ChromaDB for simplicity. The patterns apply equally to Pinecone, Weaviate, Supabase, or any vector store.
-
-**Is the code up to date?**
-Yes. All code uses LangChain 1.x (2026 stable release) with current best practices.
-
----
-
 ## License
 
-This course code is available under the [MIT License](LICENSE).
-
----
-
-## Support
-
-- **Issues** — open a GitHub issue for bugs or questions
-- **Community** — join the AI Guild for direct support
-- **Updates** — star this repo to get notified of new releases
-
----
-
-*Ready to build RAG that actually works in production? Let's go.*
+Released under the [MIT License](LICENSE).
