@@ -52,6 +52,7 @@ def web_loader():
     print(f"Source: {documents[0].metadata.get('source', 'N/A')}")
     print(f"Content length: {len(documents[0].page_content)} characters")
     print(f"Preview: {documents[0].page_content[:200]}...")
+    
 
 
 def lazy_loader():
@@ -76,10 +77,10 @@ def doc_structure():
         page_content="This is a sample document.",
         metadata={
             "source": "manual_creation.txt",
-            "author": "Paulo",
+            "author": "Haseeb Khan",
             "length": 30,
             "tags": ["sample", "test"],
-            "created_at": "2024-06-01",
+            "created_at": "2026-05-05",
         },
     )
 
