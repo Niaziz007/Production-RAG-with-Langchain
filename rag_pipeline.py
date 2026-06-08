@@ -24,37 +24,37 @@ embeddings_model = OpenAIEmbeddings(model="text-embedding-3-small")
 # Sample knowledge base
 KNOWLEDGE_BASE = """# LangChain Framework
 
-LangChain is a framework for developing applications powered by language models. It was created by Harrison Chase in October 2022.
+    LangChain is a framework for developing applications powered by language models. It was created by Harrison Chase in October 2022.
 
-## Core Components
+    ## Core Components
 
-1. **Models**: LangChain supports various LLM providers including OpenAI, Anthropic, and local models.
+    1. **Models**: LangChain supports various LLM providers including OpenAI, Anthropic, and local models.
 
-2. **Prompts**: Templates for structuring inputs to language models.
+    2. **Prompts**: Templates for structuring inputs to language models.
 
-3. **Chains**: Sequences of calls to models and other components.
+    3. **Chains**: Sequences of calls to models and other components.
 
-4. **Agents**: Systems that use LLMs to determine which actions to take.
+    4. **Agents**: Systems that use LLMs to determine which actions to take.
 
-5. **Memory**: Components for persisting state between chain/agent calls.
+    5. **Memory**: Components for persisting state between chain/agent calls.
 
-## LangGraph
+    ## LangGraph
 
-LangGraph is a library for building stateful, multi-actor applications. Key features:
-- State management
-- Cycles and loops
-- Human-in-the-loop
-- Persistence
+    LangGraph is a library for building stateful, multi-actor applications. Key features:
+    - State management
+    - Cycles and loops
+    - Human-in-the-loop
+    - Persistence
 
-## Pricing
+    ## Pricing
 
-LangChain itself is open source and free. LangSmith (the observability platform) has a free tier and paid plans starting at $39/month.
+    LangChain itself is open source and free. LangSmith (the observability platform) has a free tier and paid plans starting at $39/month.
 
-## Getting Started
+    ## Getting Started
 
-Install with: pip install langchain langchain-openai
-Create your first chain in under 10 lines of code.
-"""
+    Install with: pip install langchain langchain-openai
+    Create your first chain in under 10 lines of code.
+    """
 llm = init_chat_model(model="gpt-4o-mini", temperature=0.2)
 
 
