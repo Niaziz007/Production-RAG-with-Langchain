@@ -1,0 +1,4 @@
+So the first thing that matters the most is chunking:
+- Use RecursiveCharacterTextSplitter for better chunking, especially for long documents. It can split text based on characters, sentences, or paragraphs, which helps maintain context and improves retrieval performance.
+- Avoid using simple character-based chunking, as it can lead to loss of context and important information, especially if the chunks are too small or cut off in the middle of sentences.
+- Proper chunking ensures that the retriever can find relevant information more effectively, which is crucial for the success of the RAG pipeline. It allows the model to access the right information when generating responses, leading to more accurate and relevant answers.
